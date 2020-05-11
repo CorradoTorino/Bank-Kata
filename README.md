@@ -6,9 +6,9 @@ Write a class named `Account` that implements the following public interface:
 ```csharp
 public interface AccountService
 {
-    void deposit(int amount) 
-    void withdraw(int amount) 
-    void printStatement()
+    void deposit(int amount); 
+    void withdraw(int amount); 
+    void printStatement();
 }
 ```
 You cannot change the public interface of this class.
