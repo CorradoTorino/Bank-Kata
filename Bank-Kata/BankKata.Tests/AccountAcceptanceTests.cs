@@ -1,19 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace BankKata.UnitTests
+namespace BankKata.Tests
 {
-    public interface IClock
-    {
-        public DateTime Now();
-    }
-
     [TestClass]
-    public class AccountServiceTests
+    public class AccountAcceptanceTests
     {
         [TestMethod]
         [Ignore("Feature not yet implemented")]
@@ -49,10 +43,5 @@ namespace BankKata.UnitTests
                 "10/01/2012 || 1000   || 1000",
             });
         }
-    }
-
-    public interface IConsole
-    {
-        void WriteLine(string lineToBePrinted);
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace BankKata.UnitTests
+namespace BankKata.Tests
 {
     public class Account
     {
