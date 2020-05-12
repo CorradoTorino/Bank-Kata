@@ -6,16 +6,22 @@ namespace BankKata.Tests
     {
         private readonly IClock clock;
         private readonly IConsole console;
+        private readonly ITransactionRepository transactionRepository;
 
-        public Account(IClock clock, IConsole consoleMockObject)
+        public Account(IClock clock, IConsole console, ITransactionRepository transactionRepository)
         {
             this.clock = clock;
-            this.console = consoleMockObject;
+            this.console = console;
+            this.transactionRepository = transactionRepository;
+        }
+
+        public Account(IClock clock, IConsole console): this(clock, console, new TransactionRepository())
+        {
         }
 
         public void Deposit(int amount)
         {
-            throw new NotImplementedException();
+            this.transactionRepository.RecordTransaction(new Transaction(this.clock.Now(), amount));
         }
 
         public void Withdraw(int amount)

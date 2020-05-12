@@ -19,7 +19,7 @@ namespace BankKata.Tests
             var consoleMock = new Mock<IConsole>();
             var consoleCalls = new List<string>();
             consoleMock.Setup(m => m.WriteLine(Capture.In(consoleCalls)));
-            
+
             var account = new Account(clockMock.Object, consoleMock.Object);
 
             // Act
