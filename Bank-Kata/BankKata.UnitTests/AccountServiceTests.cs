@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Bank_Kata.UnitTests
+namespace BankKata.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class AccountServiceTests
     {
         [TestMethod]
         public void TestMethod1()
