@@ -29,7 +29,7 @@ namespace BankKata.Tests
 
             // Assert
             transactionRepositoryMock.Verify(
-                (repository)=>repository.RecordTransaction(
+                (repository)=>repository.Record(
                     It.Is<Transaction>(transaction=>transaction.TransactionDate == dateTime && transaction.Amount == amount)));
         }
 
@@ -53,7 +53,7 @@ namespace BankKata.Tests
 
             // Assert
             transactionRepositoryMock.Verify(
-                (repository) => repository.RecordTransaction(
+                (repository) => repository.Record(
                     It.Is<Transaction>(transaction => transaction.TransactionDate == dateTime && transaction.Amount == -amount)));
         }
     }

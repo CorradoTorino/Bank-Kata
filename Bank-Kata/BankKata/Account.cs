@@ -21,12 +21,12 @@ namespace BankKata
 
         public void Deposit(int amount)
         {
-            this.transactionRepository.RecordTransaction(new Transaction(this.clock.Now(), amount));
+            this.transactionRepository.Record(new Transaction(this.clock.Now(), amount));
         }
 
         public void Withdraw(int amount)
         {
-            this.transactionRepository.RecordTransaction(new Transaction(this.clock.Now(), -amount));
+            this.transactionRepository.Record(new Transaction(this.clock.Now(), -amount));
         }
 
         public void PrintStatement()

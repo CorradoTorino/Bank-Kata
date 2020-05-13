@@ -1,12 +1,21 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BankKata
 {
     public class TransactionRepository : ITransactionRepository
     {
-        public void RecordTransaction(Transaction transaction)
+        private readonly List<Transaction> Transactions = new List<Transaction>();
+
+        public void Record(Transaction transaction)
         {
-            throw new NotImplementedException();
+            this.Transactions.Add(transaction);
+        }
+
+        public IEnumerable<Transaction> GetAll()
+        {
+            return this.Transactions.ToList();
         }
     }
 }

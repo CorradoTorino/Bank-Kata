@@ -1,7 +1,12 @@
-﻿namespace BankKata
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace BankKata
 {
     public interface ITransactionRepository
     {
-        void RecordTransaction(Transaction transaction);
+        void Record(Transaction transaction);
+        
+        IEnumerable<Transaction> GetAll();
     }
 }
