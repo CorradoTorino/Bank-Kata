@@ -1,6 +1,6 @@
 using System;
 
-namespace BankKata.Tests
+namespace BankKata
 {
     public class Account
     {
@@ -26,7 +26,7 @@ namespace BankKata.Tests
 
         public void Withdraw(int amount)
         {
-            throw new NotImplementedException();
+            this.transactionRepository.RecordTransaction(new Transaction(this.clock.Now(), -amount));
         }
 
         public void PrintStatement()

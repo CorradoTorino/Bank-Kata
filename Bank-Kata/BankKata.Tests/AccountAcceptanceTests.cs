@@ -10,7 +10,7 @@ namespace BankKata.Tests
     public class AccountAcceptanceTests
     {
         [TestMethod]
-        [Ignore("Feature not yet implemented")]
+        //[Ignore("Feature not yet implemented")]
         public void PrintStatementAcceptanceTest()
         {
             // Arrange
