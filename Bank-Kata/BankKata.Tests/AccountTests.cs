@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -16,6 +16,7 @@ namespace BankKata.Tests
         readonly Mock<IClock> ClockMock = new Mock<IClock>();
         readonly Mock<IConsole> ConsoleMock = new Mock<IConsole>();
         readonly Mock<ITransactionRepository> TransactionRepositoryMock = new Mock<ITransactionRepository>();
+        readonly Mock<IStatementPrinter> StatementPrinterMock = new Mock<IStatementPrinter>();
 
         private Account Sut;
 
@@ -26,8 +27,8 @@ namespace BankKata.Tests
 
             this.Sut = new Account(
                 this.ClockMock.Object,
-                this.ConsoleMock.Object,
-                this.TransactionRepositoryMock.Object);
+                this.TransactionRepositoryMock.Object,
+                this.StatementPrinterMock.Object);
         }
 
         [TestMethod]
@@ -40,8 +41,8 @@ namespace BankKata.Tests
 
             // Assert
             this.TransactionRepositoryMock.Verify(
-                (repository)=>repository.Record(
-                    It.Is<Transaction>(transaction=>transaction.TransactionDate == this.DateTime && transaction.Amount == amount)));
+                (repository) => repository.Record(
+                    It.Is<Transaction>(transaction => transaction.TransactionDate == this.DateTime && transaction.Amount == amount)));
         }
 
         [TestMethod]
@@ -69,21 +70,17 @@ namespace BankKata.Tests
             };
 
             this.TransactionRepositoryMock.Setup(x => x.GetAll()).Returns(transactionLists);
-
             var consoleOutputs = new List<string>();
 
             this.ConsoleMock.Setup(x => x.WriteLine(Capture.In(consoleOutputs)));
-            
+
             // Act
-            Sut.PrintStatement();
+            this.Sut.PrintStatement();
 
             // Assert
-            consoleOutputs.Should().BeEquivalentTo(new List<string>
-            {
-                "Date       || Amount || Balance",
-                "15/01/2020 || 500    ||  -500",
-                "14/01/2020 || -1000  || -1000",
-            });
+            this.StatementPrinterMock
+                .Verify(printer => printer.PrintStatement(
+                        It.Is<IEnumerable<Transaction>>(transactions=>transactions.Equals(transactionLists))));
         }
     }
 }

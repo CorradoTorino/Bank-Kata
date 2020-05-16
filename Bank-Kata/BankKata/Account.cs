@@ -5,18 +5,15 @@ namespace BankKata
     public class Account
     {
         private readonly IClock clock;
-        private readonly IConsole console;
         private readonly ITransactionRepository transactionRepository;
+        private readonly IStatementPrinter statementPrinter;
 
-        public Account(IClock clock, IConsole console, ITransactionRepository transactionRepository)
+        public Account(IClock clock, ITransactionRepository transactionRepository,
+            IStatementPrinter statementPrinter)
         {
             this.clock = clock;
-            this.console = console;
             this.transactionRepository = transactionRepository;
-        }
-
-        public Account(IClock clock, IConsole console): this(clock, console, new TransactionRepository())
-        {
+            this.statementPrinter = statementPrinter;
         }
 
         public void Deposit(int amount)
@@ -33,7 +30,7 @@ namespace BankKata
 
         public void PrintStatement()
         {
-            throw new NotImplementedException();
+            this.statementPrinter.PrintStatement(this.transactionRepository.GetAll());
         }
     }
 }

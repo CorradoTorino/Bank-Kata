@@ -1,1 +1,3 @@
 - Introduce Autofixture
+- Account:deposit with negative amount
+- remove IConsole from Account

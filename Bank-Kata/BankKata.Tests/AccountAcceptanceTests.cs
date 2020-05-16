@@ -9,8 +9,6 @@ namespace BankKata.Tests
     [TestClass]
     public class AccountAcceptanceTests
     {
-        [TestMethod]
-        //[Ignore("Feature not yet implemented")]
         public void PrintStatementAcceptanceTest()
         {
             // Arrange
@@ -18,9 +16,11 @@ namespace BankKata.Tests
             
             var consoleMock = new Mock<IConsole>();
             var consoleCalls = new List<string>();
+            var transactionRepository = new TransactionRepository();
+            var statementPrinter = new StatementPrinter(consoleMock.Object);
             consoleMock.Setup(m => m.WriteLine(Capture.In(consoleCalls)));
 
-            var account = new Account(clockMock.Object, consoleMock.Object);
+            var account = new Account(clockMock.Object, transactionRepository, statementPrinter);
 
             // Act
             clockMock.Setup((x) => x.Now()).Returns(new DateTime(2012, 01, 10));
