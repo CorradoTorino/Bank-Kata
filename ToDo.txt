@@ -1,3 +1,9 @@
 - Introduce Autofixture
 - Account:deposit with negative amount
+- assert printed in the correct order
+- check negative transactions
+- evaluate balance
+
+
+Done
 - remove IConsole from Account
